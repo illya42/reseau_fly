@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 
@@ -26,7 +27,7 @@ namespace reseau_fly
             }
         }
 
-        public void insertUtilisateur(reseau_fly.Utilisateur unUtilisateur)
+        public void insertUtilisateur(Utilisateur unUser)
         {
             string requete = "";
 
@@ -38,7 +39,7 @@ namespace reseau_fly
                 //requete paramétrée : @designation = :designation
                 //requete = "insert into produit values (null, @designation, @prix, @qte, @categorie);";
 
-                requete = "insert into utilisateur values (null, @nom, @prenom, @mail, @pic);";
+                requete = "insert into utilisateur values (null, @nom, @prenom, @mail, @mdp, @pic);";
 
                 //on crée une commande SQL
                 MySqlCommand cmd = this.maConnexion.CreateCommand();
@@ -48,10 +49,11 @@ namespace reseau_fly
                 //affecter les valeurs aux paramètres de la requete
                 //cmd.Parameters.AddWithValue("@designation", unProduit.getDesignation());
 
-                cmd.Parameters.AddWithValue("@nom", unUtilisateur.Nom);
-                cmd.Parameters.AddWithValue("@prenom", unUtilisateur.Prenom);
-                cmd.Parameters.AddWithValue("@mail", unUtilisateur.Mail);
-                cmd.Parameters.AddWithValue("@pic", unUtilisateur.Pic);
+                cmd.Parameters.AddWithValue("@nom", unUser.Nom);
+                cmd.Parameters.AddWithValue("@prenom", unUser.Prenom);
+                cmd.Parameters.AddWithValue("@mail", unUser.Mail);
+                cmd.Parameters.AddWithValue("@mdp", unUser.Mdp);
+                cmd.Parameters.AddWithValue("@pic", unUser.Pic);
 
                 //execution de la requete via la commande
                 cmd.ExecuteNonQuery();
@@ -93,7 +95,8 @@ namespace reseau_fly
                                 unReader.GetString(1),
                                 unReader.GetString(2),
                                 unReader.GetString(3),
-                                unReader.GetString(4)
+                                unReader.GetString(4),
+                                unReader.GetString(5)
                                 );
 
                             //On ajoute un produit dans la liste
@@ -203,7 +206,7 @@ namespace reseau_fly
                         {
                             //on instancie un produit 
                             unUtilisateur = new Utilisateur(
-                              unReader.GetInt32(0), unReader.GetString(1), unReader.GetString(2), unReader.GetString(3), unReader.GetString(4)
+                              unReader.GetInt32(0), unReader.GetString(1), unReader.GetString(2), unReader.GetString(3), unReader.GetString(4), unReader.GetString(5)
                                );
                         }
                     }
@@ -221,6 +224,159 @@ namespace reseau_fly
             {
                 Console.WriteLine("Erreur d'execution de la requete :" + requete);
             }
+
+            return unUtilisateur;
+        }
+        public reseau_fly.Utilisateur Connexion(string mail, string mdp)
+        {
+            Utilisateur unUtilisateur = null;
+
+            string requete = "select * from utilisateur where mail = @mail and mdp = @mdp;";
+
+            try
+            {
+                //ouverture de la connexion SQL
+                this.maConnexion.Open();
+
+                //on crée une commande SQL (comme Statement en java)
+                MySqlCommand cmd = this.maConnexion.CreateCommand();
+
+                cmd.CommandText = requete;
+                cmd.Parameters.AddWithValue("@mail", mail);
+                cmd.Parameters.AddWithValue("@mdp", mdp);
+
+                //parcourir les enregitrements (comme en java : ResultSet)
+                DbDataReader unReader = cmd.ExecuteReader();
+                try
+                {
+                    if (unReader.HasRows)
+                    {
+                        //parcours des resultats avec un while lire
+                        if (unReader.Read())
+                        {
+                            //on instancie un produit 
+                            unUtilisateur = new Utilisateur(
+                              unReader.GetInt32(0), unReader.GetString(1), unReader.GetString(2), unReader.GetString(3), unReader.GetString(4), unReader.GetString(5)
+                               );
+                        }
+                    }
+                    unReader.Close();
+                }
+                finally
+                {
+                    Console.WriteLine("Erreur extraction champs de la base de données ");
+                }
+
+                //fermeture de la connexion 
+                this.maConnexion.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Erreur d'execution de la requete :" + requete);
+            }
+
+            return unUtilisateur;
+        }
+
+        public reseau_fly.Utilisateur verifUtilisateur(string mail, string mdp)
+        {
+            Utilisateur unUtilisateur = null;
+            string requete = "select * from utilisateur where mail = @mail and mdp = @mdp;";
+
+            try
+            {
+                //ouverture de la connexion SQL
+                this.maConnexion.Open();
+
+                //on crée une commande SQL (comme Statement en java)
+                MySqlCommand cmd = this.maConnexion.CreateCommand();
+
+                cmd.CommandText = requete;
+                cmd.Parameters.AddWithValue("@mail", mail);
+                cmd.Parameters.AddWithValue("@mdp", mdp);
+
+                //parcourir les enregitrements (comme en java : ResultSet)
+                DbDataReader unReader = cmd.ExecuteReader();
+                try
+                {
+                    if (unReader.HasRows)
+                    {
+                        //parcours des resultats avec un while lire
+                        if (unReader.Read())
+                        {
+                            //on instancie un produit 
+                            unUtilisateur = new Utilisateur(
+                              unReader.GetInt32(0), unReader.GetString(1), unReader.GetString(2), unReader.GetString(3), unReader.GetString(4), unReader.GetString(5)
+                               );
+                        }
+                    }
+                    unReader.Close();
+                }
+                finally
+                {
+                    Console.WriteLine("Erreur extraction champs de la base de données ");
+                }
+
+                //fermeture de la connexion 
+                this.maConnexion.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Erreur d'execution de la requete :" + requete);
+            }
+
+            Debug.WriteLine(requete);
+
+            return unUtilisateur;
+        }
+
+        public reseau_fly.Utilisateur verifMail(string mail)
+        {
+            Utilisateur unUtilisateur = null;
+            string requete = "select * from utilisateur where mail = @mail;";
+
+            try
+            {
+                //ouverture de la connexion SQL
+                this.maConnexion.Open();
+
+                //on crée une commande SQL (comme Statement en java)
+                MySqlCommand cmd = this.maConnexion.CreateCommand();
+
+                cmd.CommandText = requete;
+                cmd.Parameters.AddWithValue("@mail", mail);
+
+                //parcourir les enregitrements (comme en java : ResultSet)
+                DbDataReader unReader = cmd.ExecuteReader();
+                try
+                {
+                    if (unReader.HasRows)
+                    {
+                        //parcours des resultats avec un while lire
+                        if (unReader.Read())
+                        {
+                            //on instancie un produit 
+                            unUtilisateur = new Utilisateur(
+                              unReader.GetInt32(0), unReader.GetString(1), unReader.GetString(2), unReader.GetString(3), unReader.GetString(4), unReader.GetString(5)
+                               );
+                        }
+                    }
+                    unReader.Close();
+                }
+                finally
+                {
+                    Console.WriteLine("Erreur extraction champs de la base de données ");
+                }
+
+                //fermeture de la connexion 
+                this.maConnexion.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Erreur d'execution de la requete :" + requete);
+            }
+
+            Debug.WriteLine(requete);
 
             return unUtilisateur;
         }

@@ -1,3 +1,5 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="login.aspx.cs" Inherits="reseau_fly.template.login" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,39 +45,35 @@
                     <div class="login-content">
                         <div class="login-logo">
                             <a href="#">
-                                <img src="images/icon/logo.png" alt="CoolAdmin">
+                                <img src="images/logo_app.png" alt="Fly Together">
                             </a>
                         </div>
                         <div class="login-form">
-                            <form action="" method="post">
+                            <form id="form1" runat="server" method="post">
                                 <div class="form-group">
-                                    <label>Email Address</label>
-                                    <input class="au-input au-input--full" type="email" name="email" placeholder="Email">
+                                    <label>Votre E-mail : </label>
+                                    <asp:TextBox ID="Mail" runat="server" placeholder=" . . . "></asp:TextBox>  
                                 </div>
                                 <div class="form-group">
-                                    <label>Password</label>
-                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
+                                    <label>Votre mot de passe : </label>
+                                    <asp:TextBox ID="Mdp" TextMode="Password" runat="server" placeholder=" . . . "></asp:TextBox>
                                 </div>
                                 <div class="login-checkbox">
                                     <label>
-                                        <input type="checkbox" name="remember">Remember Me
-                                    </label>
-                                    <label>
-                                        <a href="#">Forgotten Password?</a>
+                                        <a id="oubli" runat="server" href="#">Mot de passe oublié ?</a>
                                     </label>
                                 </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
+                                <asp:Button class="au-btn au-btn--block au-btn--green m-b-20" ID="Button1" runat="server" OnClick="connection" Text="Connection" />
                                 <div class="social-login-content">
                                     <div class="social-button">
-                                        <button class="au-btn au-btn--block au-btn--blue m-b-20">sign in with facebook</button>
-                                        <button class="au-btn au-btn--block au-btn--blue2">sign in with twitter</button>
+                                        <button class="au-btn au-btn--block au-btn--blue m-b-20">Connection avec Google</button>
                                     </div>
                                 </div>
                             </form>
                             <div class="register-link">
                                 <p>
-                                    Don't you have account?
-                                    <a href="#">Sign Up Here</a>
+                                    Pas de compte ?
+                                    <a href="inscription.aspx">Inscrivez-vous ici !</a>
                                 </p>
                             </div>
                         </div>

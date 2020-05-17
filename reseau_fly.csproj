@@ -75,11 +75,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="default.aspx" />
     <Content Include="template\calendar.html" />
     <Content Include="template\css\bootstrap-datetimepicker.min.css" />
     <Content Include="template\css\font-face.css" />
     <Content Include="template\css\theme.css" />
+    <Content Include="template\default.aspx" />
     <Content Include="template\fontawesome.html" />
     <Content Include="template\fonts\poppins\poppins-v5-latin-100.svg" />
     <Content Include="template\fonts\poppins\poppins-v5-latin-100italic.svg" />
@@ -100,6 +100,7 @@
     <Content Include="template\fonts\poppins\poppins-v5-latin-italic.svg" />
     <Content Include="template\fonts\poppins\poppins-v5-latin-regular.svg" />
     <Content Include="template\form.html" />
+    <Content Include="template\home.aspx" />
     <Content Include="template\images\bg-title-01.jpg" />
     <Content Include="template\images\bg-title-02.jpg" />
     <Content Include="template\images\icon\avatar-01.jpg" />
@@ -114,13 +115,19 @@
     <Content Include="template\images\icon\logo-white.png" />
     <Content Include="template\images\icon\logo.png" />
     <Content Include="template\images\icon\Untitled-1.jpg" />
+    <Content Include="template\images\logo_add.png" />
+    <Content Include="template\images\logo_app.png" />
+    <Content Include="template\images\logo_user.png" />
     <Content Include="template\inbox.html" />
+    <Content Include="template\include\footer.aspx" />
+    <Content Include="template\include\header_test.aspx" />
+    <Content Include="template\inscription.aspx" />
+    <Content Include="template\login.aspx" />
     <Content Include="template\menu_admin.html" />
     <Content Include="template\index4.html" />
     <Content Include="template\js\bootstrap-datetimepicker.js" />
     <Content Include="template\js\main.js" />
     <Content Include="template\js\moment.js" />
-    <Content Include="template\login.html" />
     <Content Include="template\media\9606031aabebde32fa96edeff071a132.jpg" />
     <Content Include="template\register.html" />
     <Content Include="template\table.html" />
@@ -291,6 +298,7 @@
     <Content Include="template\vendor\vector-map\jqvmap.min.css" />
     <Content Include="template\vendor\wow\animate.css" />
     <Content Include="template\vendor\wow\wow.min.js" />
+    <Content Include="test.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -301,15 +309,50 @@
     <Compile Include="class\Utilisateur_admin.cs" />
     <Compile Include="Bdd.cs" />
     <Compile Include="class\Voyage.cs" />
-    <Compile Include="default.aspx.cs">
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="class\Utilisateur.cs" />
+    <Compile Include="template\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="default.aspx.designer.cs">
+    <Compile Include="template\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="class\Utilisateur.cs" />
+    <Compile Include="template\home.aspx.cs">
+      <DependentUpon>home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="template\home.aspx.designer.cs">
+      <DependentUpon>home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="template\include\footer.aspx.cs">
+      <DependentUpon>footer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="template\include\footer.aspx.designer.cs">
+      <DependentUpon>footer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="template\include\header_test.aspx.cs">
+      <DependentUpon>header_test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="template\include\header_test.aspx.designer.cs">
+      <DependentUpon>header_test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="template\inscription.aspx.cs">
+      <DependentUpon>inscription.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="template\inscription.aspx.designer.cs">
+      <DependentUpon>inscription.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="template\login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="template\login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
