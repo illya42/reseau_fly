@@ -38,7 +38,7 @@
 </head>
 
 <body class="animsition">
-    <div class="page-wrapper">
+    <div class="page-wrapper" style="background-image: url('images/win.jpg'); box-shadow: inset 2000px 0 0 0 rgba(0, 0, 0, 0.4);">
         <div class="page-content--bge5">
             <div class="container">
                 <div class="login-wrap">

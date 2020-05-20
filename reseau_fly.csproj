@@ -100,7 +100,10 @@
     <Content Include="template\fonts\poppins\poppins-v5-latin-italic.svg" />
     <Content Include="template\fonts\poppins\poppins-v5-latin-regular.svg" />
     <Content Include="template\form.html" />
+    <Content Include="template\groupe.aspx" />
     <Content Include="template\home.aspx" />
+    <Content Include="template\images\alger.jpg" />
+    <Content Include="template\images\athenes.jpg" />
     <Content Include="template\images\bg-title-01.jpg" />
     <Content Include="template\images\bg-title-02.jpg" />
     <Content Include="template\images\icon\avatar-01.jpg" />
@@ -118,6 +121,18 @@
     <Content Include="template\images\logo_add.png" />
     <Content Include="template\images\logo_app.png" />
     <Content Include="template\images\logo_user.png" />
+    <Content Include="template\images\londres.jpg" />
+    <Content Include="template\images\lyon.jpg" />
+    <Content Include="template\images\madrid.jpg" />
+    <Content Include="template\images\moscou.jpg" />
+    <Content Include="template\images\newyork.jpg" />
+    <Content Include="template\images\nice.jpg" />
+    <Content Include="template\images\paris.jpg" />
+    <Content Include="template\images\sky.jpg" />
+    <Content Include="template\images\toulouse.jpg" />
+    <Content Include="template\images\tunis.jpg" />
+    <Content Include="template\images\win.jpg" />
+    <Content Include="template\images\window.jpg" />
     <Content Include="template\inbox.html" />
     <Content Include="template\include\footer.aspx" />
     <Content Include="template\include\header_test.aspx" />
@@ -129,7 +144,6 @@
     <Content Include="template\js\main.js" />
     <Content Include="template\js\moment.js" />
     <Content Include="template\media\9606031aabebde32fa96edeff071a132.jpg" />
-    <Content Include="template\register.html" />
     <Content Include="template\table.html" />
     <Content Include="template\typo.html" />
     <Content Include="template\vendor\animsition\animsition.min.css" />
@@ -298,6 +312,7 @@
     <Content Include="template\vendor\vector-map\jqvmap.min.css" />
     <Content Include="template\vendor\wow\animate.css" />
     <Content Include="template\vendor\wow\wow.min.js" />
+    <Content Include="template\voyage.aspx" />
     <Content Include="test.html" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -317,6 +332,13 @@
     </Compile>
     <Compile Include="template\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="template\groupe.aspx.cs">
+      <DependentUpon>groupe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="template\groupe.aspx.designer.cs">
+      <DependentUpon>groupe.aspx</DependentUpon>
     </Compile>
     <Compile Include="template\home.aspx.cs">
       <DependentUpon>home.aspx</DependentUpon>
@@ -352,6 +374,13 @@
     </Compile>
     <Compile Include="template\login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="template\voyage.aspx.cs">
+      <DependentUpon>voyage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="template\voyage.aspx.designer.cs">
+      <DependentUpon>voyage.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -151,25 +151,18 @@ namespace reseau_fly
 
             try
             {
-                //Connexion SQL
                 this.maConnexion.Open();
 
-                //requete paramétrée : @designation = :designation
                 requete = "update utilisateur set nom = @nom, prenom = @prenom, mail = @mail, pic = @pic where id_U = @id_U;";
 
-                //on crée une commande SQL
                 MySqlCommand cmd = this.maConnexion.CreateCommand();
 
                 cmd.CommandText = requete;
-
-                //affecter les valeurs aux paramètres de la requete
                 cmd.Parameters.AddWithValue("@nom", unUtilisateur.Nom);
                 cmd.Parameters.AddWithValue("@prenom", unUtilisateur.Prenom);
                 cmd.Parameters.AddWithValue("@mail", unUtilisateur.Mail);
                 cmd.Parameters.AddWithValue("@pic", unUtilisateur.Pic);
                 cmd.Parameters.AddWithValue("@id_U", unUtilisateur.Id_U);
-
-                //execution de la requete via la commande
                 cmd.ExecuteNonQuery();
 
                 this.maConnexion.Close();
@@ -183,28 +176,19 @@ namespace reseau_fly
         {
             Utilisateur unUtilisateur = null;
             string requete = "select * from utilisateur where id_U = @id_U;";
-
             try
             {
-                //ouverture de la connexion SQL
                 this.maConnexion.Open();
-
-                //on crée une commande SQL (comme Statement en java)
                 MySqlCommand cmd = this.maConnexion.CreateCommand();
-
                 cmd.CommandText = requete;
                 cmd.Parameters.AddWithValue("@id_U", id_U);
-
-                //parcourir les enregitrements (comme en java : ResultSet)
                 DbDataReader unReader = cmd.ExecuteReader();
                 try
                 {
                     if (unReader.HasRows)
                     {
-                        //parcours des resultats avec un while lire
                         if (unReader.Read())
                         {
-                            //on instancie un produit 
                             unUtilisateur = new Utilisateur(
                               unReader.GetInt32(0), unReader.GetString(1), unReader.GetString(2), unReader.GetString(3), unReader.GetString(4), unReader.GetString(5)
                                );
@@ -216,45 +200,32 @@ namespace reseau_fly
                 {
                     Console.WriteLine("Erreur extraction champs de la base de données ");
                 }
-
-                //fermeture de la connexion 
                 this.maConnexion.Close();
             }
             catch (Exception e)
             {
                 Console.WriteLine("Erreur d'execution de la requete :" + requete);
             }
-
             return unUtilisateur;
         }
         public reseau_fly.Utilisateur Connexion(string mail, string mdp)
         {
             Utilisateur unUtilisateur = null;
-
             string requete = "select * from utilisateur where mail = @mail and mdp = @mdp;";
-
             try
             {
-                //ouverture de la connexion SQL
                 this.maConnexion.Open();
-
-                //on crée une commande SQL (comme Statement en java)
                 MySqlCommand cmd = this.maConnexion.CreateCommand();
-
                 cmd.CommandText = requete;
                 cmd.Parameters.AddWithValue("@mail", mail);
                 cmd.Parameters.AddWithValue("@mdp", mdp);
-
-                //parcourir les enregitrements (comme en java : ResultSet)
                 DbDataReader unReader = cmd.ExecuteReader();
                 try
                 {
                     if (unReader.HasRows)
                     {
-                        //parcours des resultats avec un while lire
                         if (unReader.Read())
                         {
-                            //on instancie un produit 
                             unUtilisateur = new Utilisateur(
                               unReader.GetInt32(0), unReader.GetString(1), unReader.GetString(2), unReader.GetString(3), unReader.GetString(4), unReader.GetString(5)
                                );
@@ -266,15 +237,12 @@ namespace reseau_fly
                 {
                     Console.WriteLine("Erreur extraction champs de la base de données ");
                 }
-
-                //fermeture de la connexion 
                 this.maConnexion.Close();
             }
             catch (Exception e)
             {
                 Console.WriteLine("Erreur d'execution de la requete :" + requete);
             }
-
             return unUtilisateur;
         }
 
@@ -282,29 +250,20 @@ namespace reseau_fly
         {
             Utilisateur unUtilisateur = null;
             string requete = "select * from utilisateur where mail = @mail and mdp = @mdp;";
-
             try
             {
-                //ouverture de la connexion SQL
                 this.maConnexion.Open();
-
-                //on crée une commande SQL (comme Statement en java)
                 MySqlCommand cmd = this.maConnexion.CreateCommand();
-
                 cmd.CommandText = requete;
                 cmd.Parameters.AddWithValue("@mail", mail);
                 cmd.Parameters.AddWithValue("@mdp", mdp);
-
-                //parcourir les enregitrements (comme en java : ResultSet)
                 DbDataReader unReader = cmd.ExecuteReader();
                 try
                 {
                     if (unReader.HasRows)
                     {
-                        //parcours des resultats avec un while lire
                         if (unReader.Read())
                         {
-                            //on instancie un produit 
                             unUtilisateur = new Utilisateur(
                               unReader.GetInt32(0), unReader.GetString(1), unReader.GetString(2), unReader.GetString(3), unReader.GetString(4), unReader.GetString(5)
                                );
@@ -316,17 +275,13 @@ namespace reseau_fly
                 {
                     Console.WriteLine("Erreur extraction champs de la base de données ");
                 }
-
-                //fermeture de la connexion 
                 this.maConnexion.Close();
             }
             catch (Exception e)
             {
                 Console.WriteLine("Erreur d'execution de la requete :" + requete);
             }
-
             Debug.WriteLine(requete);
-
             return unUtilisateur;
         }
 
@@ -334,28 +289,19 @@ namespace reseau_fly
         {
             Utilisateur unUtilisateur = null;
             string requete = "select * from utilisateur where mail = @mail;";
-
             try
             {
-                //ouverture de la connexion SQL
                 this.maConnexion.Open();
-
-                //on crée une commande SQL (comme Statement en java)
                 MySqlCommand cmd = this.maConnexion.CreateCommand();
-
                 cmd.CommandText = requete;
                 cmd.Parameters.AddWithValue("@mail", mail);
-
-                //parcourir les enregitrements (comme en java : ResultSet)
                 DbDataReader unReader = cmd.ExecuteReader();
                 try
                 {
                     if (unReader.HasRows)
                     {
-                        //parcours des resultats avec un while lire
                         if (unReader.Read())
                         {
-                            //on instancie un produit 
                             unUtilisateur = new Utilisateur(
                               unReader.GetInt32(0), unReader.GetString(1), unReader.GetString(2), unReader.GetString(3), unReader.GetString(4), unReader.GetString(5)
                                );
@@ -367,18 +313,278 @@ namespace reseau_fly
                 {
                     Console.WriteLine("Erreur extraction champs de la base de données ");
                 }
-
-                //fermeture de la connexion 
                 this.maConnexion.Close();
             }
             catch (Exception e)
             {
                 Console.WriteLine("Erreur d'execution de la requete :" + requete);
             }
+            Debug.WriteLine(requete);
+            return unUtilisateur;
+        }
+        public List<Trajet> selectAllTrajets()
+        {
+            List<Trajet> lesTrajets = new List<Trajet>();
+            string requete = "select * from trajet;";
+            try
+            {
+                this.maConnexion.Open();
+                MySqlCommand cmd = this.maConnexion.CreateCommand();
+                cmd.CommandText = requete;
+                DbDataReader unReader = cmd.ExecuteReader();
+                try
+                {
+                    if (unReader.HasRows)
+                    {
+                        while (unReader.Read())
+                        {
+                            Trajet unTrajet = new Trajet(
+                                unReader.GetInt32(0),
+                                unReader.GetString(1),
+                                unReader.GetString(2),
+                                unReader.GetString(3),
+                                unReader.GetString(4),
+                                unReader.GetString(5),
+                                unReader.GetString(6),
+                                unReader.GetInt32(7)
+                                );
+                            lesTrajets.Add(unTrajet);
+                        }
+                    }
+                    unReader.Close();
+                }
+                finally
+                {
+                    Console.WriteLine("Erreur extraction des champs de la BDD");
+                }
+                this.maConnexion.Close();
+            }
+            catch (Exception E)
+            {
+                Console.WriteLine("Erreur d'execution de la requete : " + requete);
+            }
+            return lesTrajets;
+        }
+
+        public List<Trajet> selectWhereDestination(string string_aeroport, string string_recherche)
+        {
+            List<Trajet> desTrajets = new List<Trajet>();
+
+            string requete = "select * from trajet where aeroport like '%" + string_aeroport + "%' and destination like '%" + string_recherche + "%';";
+
+            try
+            {
+                this.maConnexion.Open();
+
+                MySqlCommand cmd = this.maConnexion.CreateCommand();
+
+                cmd.CommandText = requete;
+
+                DbDataReader unReader = cmd.ExecuteReader();
+
+                try
+                {
+                    if (unReader.HasRows)
+                    {
+                        while (unReader.Read())
+                        {
+                            Trajet unTrajet = new Trajet(
+                                unReader.GetInt32(0),
+                                unReader.GetString(1),
+                                unReader.GetString(2),
+                                unReader.GetString(3),
+                                unReader.GetString(4),
+                                unReader.GetString(5),
+                                unReader.GetString(6),
+                                unReader.GetInt32(7)
+                                );
+
+                            desTrajets.Add(unTrajet);
+                        }
+                    }
+                    unReader.Close();
+                }
+                finally
+                {
+                    Console.WriteLine("Erreur extraction des champs de la BDD");
+                }
+
+                this.maConnexion.Close();
+            }
+            catch (Exception E)
+            {
+                Console.WriteLine("Erreur d'execution de la requete : " + requete);
+            }
 
             Debug.WriteLine(requete);
 
-            return unUtilisateur;
+            return desTrajets;
+        }
+        public reseau_fly.Trajet detailTrajet(int id_T)
+        {
+            Trajet unTrajet = null;
+
+            string requete = "select * from trajet where id_T = @id_T;";
+            try
+            {
+                this.maConnexion.Open();
+                MySqlCommand cmd = this.maConnexion.CreateCommand();
+                cmd.CommandText = requete;
+                cmd.Parameters.AddWithValue("@id_T", id_T);
+                DbDataReader unReader = cmd.ExecuteReader();
+                try
+                {
+                    if (unReader.HasRows)
+                    {
+                        if (unReader.Read())
+                        {
+                            unTrajet = new Trajet
+                                (
+                                unReader.GetInt32(0),
+                                unReader.GetString(1),
+                                unReader.GetString(2),
+                                unReader.GetString(3),
+                                unReader.GetString(4),
+                                unReader.GetString(5),
+                                unReader.GetString(6),
+                                unReader.GetInt32(7)
+                                );
+                        }
+                    }
+                    unReader.Close();
+                }
+                finally
+                {
+                    Console.WriteLine("Erreur extraction champs de la base de données ");
+                }
+                this.maConnexion.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Erreur d'execution de la requete :" + requete);
+            }
+            Debug.WriteLine(requete);
+            return unTrajet;
+        }
+        public List<Trajet> selectDateDestination(string destinationDate)
+        {
+            List<Trajet> desTrajets = new List<Trajet>();
+
+            string requete = "select * from trajet where destination = @destinationDate;";
+            try
+            {
+                this.maConnexion.Open();
+                MySqlCommand cmd = this.maConnexion.CreateCommand();
+                cmd.CommandText = requete;
+                cmd.Parameters.AddWithValue("@destinationDate", destinationDate);
+                DbDataReader unReader = cmd.ExecuteReader();
+                try
+                {
+                    if (unReader.HasRows)
+                    {
+                        if (unReader.Read())
+                        {
+                            Trajet unTrajet = new Trajet(
+                                unReader.GetInt32(0),
+                                unReader.GetString(1),
+                                unReader.GetString(2),
+                                unReader.GetString(3),
+                                unReader.GetString(4),
+                                unReader.GetString(5),
+                                unReader.GetString(6),
+                                unReader.GetInt32(7)
+                                );
+
+                            desTrajets.Add(unTrajet);
+                        }
+                    }
+                    unReader.Close();
+                }
+                finally
+                {
+                    Console.WriteLine("Erreur extraction champs de la base de données ");
+                }
+                this.maConnexion.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Erreur d'execution de la requete :" + requete);
+            }
+            Debug.WriteLine(requete);
+            return desTrajets;
+        }
+        public void insertGroupe(Groupe unGroupe)
+        {
+            string requete = "";
+
+            try
+            {
+                this.maConnexion.Open();
+
+                requete = "insert into groupe values (null, @nom);";
+
+                MySqlCommand cmd = this.maConnexion.CreateCommand();
+
+                cmd.CommandText = requete;
+
+                cmd.Parameters.AddWithValue("@nom", unGroupe.Nom);
+
+                //execution de la requete via la commande
+                cmd.ExecuteNonQuery();
+
+                this.maConnexion.Close();
+            }
+            catch (Exception E)
+            {
+                Console.WriteLine("Erreur d'execution de la requete : " + requete);
+            }
+        }
+        public List<Groupe> selectUserGroupe(int id_U)
+        {
+            List<Groupe> desGroupes = new List<Groupe>();
+
+            string requete = "select g.* from utilisateur u, groupe g, utilisateur_admin a, organiser o where u.id_U = a.id_U and a.id_A = o.id_A and o.id_G = g.id_G and u.id_U = @id_U;";
+
+            try
+            {
+                this.maConnexion.Open();
+
+                MySqlCommand cmd = this.maConnexion.CreateCommand();
+                cmd.CommandText = requete;
+                cmd.Parameters.AddWithValue("@id_U", id_U);
+                DbDataReader unReader = cmd.ExecuteReader();
+
+                try
+                {
+                    if (unReader.HasRows)
+                    {
+                        while (unReader.Read())
+                        {
+                            Groupe unGroupe = new Groupe(
+                                unReader.GetInt32(0),
+                                unReader.GetString(1)
+                                );
+
+                            desGroupes.Add(unGroupe);
+                        }
+                    }
+                    unReader.Close();
+                }
+                finally
+                {
+                    Console.WriteLine("Erreur extraction des champs de la BDD");
+                }
+
+                this.maConnexion.Close();
+            }
+            catch (Exception E)
+            {
+                Console.WriteLine("Erreur d'execution de la requete : " + requete);
+            }
+
+            Debug.WriteLine(requete);
+
+            return desGroupes;
         }
     }
 }

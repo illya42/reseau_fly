@@ -1,10 +1,10 @@
 ﻿<div>
     <!-- #Include virtual="include/header_test.aspx" -->
-</div>  
+</div>
 
-    <h1> Gestion des Utilisateurs </h1>
-   
-    <%
+<h1>Gestion des Utilisateurs </h1>
+
+<%
         reseau_fly.Bdd uneBdd = new reseau_fly.Bdd();
         reseau_fly.Utilisateur unUGet = null;
         if (Request["action"] != null && Request["id_U"] != null && Request["action"] == "e") 
@@ -12,31 +12,59 @@
             int id_U = int.Parse(Request["id_U"]);
             unUGet = uneBdd.selectWhereUtilisateur(id_U);
         }
-    %>
- 
-    <form id="form2" method="POST"> 
-      
-            <table border="0"> 
-             <tr><td> Nom : </td><td> <input type="text" name="nom"  value='<%= (unUGet==null)?"":unUGet.Nom %>'> </td></tr> 
-             <tr><td> Prénom : </td><td> <input type="text" name="prenom" value='<%= (unUGet==null)?"":unUGet.Prenom +"" %>'> </td></tr> 
-             <tr><td> Adresse mail : </td><td> <input type="text" name="mail" value='<%= (unUGet==null)?"":unUGet.Mail +"" %>' > </td></tr> 
-             <tr><td> Mot de passe : </td><td> <input type="text" name="mdp" value='<%= (unUGet==null)?"":unUGet.Mdp +"" %>' > </td></tr> 
-             <tr><td> Image de profil : </td><td> <input type="text" name="pic" value='<%= (unUGet==null)?"":unUGet.Pic %>'> </td></tr> 
-                 
-             <tr><td>  <input type="reset" name="Annuler" value="Annuler" > </td> 
-                 <td> <%= (unUGet==null)? "<input type='submit' name='valider' value='Valider' >" :  "<input type='submit' name='modifier' value='Modifier' >" %> </td> 
-                 </tr> 
-                    
-             </table> 
-     </form> 
+%>
 
-     <p>
-            
-     
-     <br/>
-     
-     <br/>
-            <%
+<form id="form2" method="POST">
+
+    <table border="0">
+        <tr>
+            <td>Nom : </td>
+            <td>
+                <input type="text" name="nom" value='<%= (unUGet==null)?"":unUGet.Nom %>'>
+            </td>
+        </tr>
+        <tr>
+            <td>Prénom : </td>
+            <td>
+                <input type="text" name="prenom" value='<%= (unUGet==null)?"":unUGet.Prenom +"" %>'>
+            </td>
+        </tr>
+        <tr>
+            <td>Adresse mail : </td>
+            <td>
+                <input type="text" name="mail" value='<%= (unUGet==null)?"":unUGet.Mail +"" %>'>
+            </td>
+        </tr>
+        <tr>
+            <td>Mot de passe : </td>
+            <td>
+                <input type="text" name="mdp" value='<%= (unUGet==null)?"":unUGet.Mdp +"" %>'>
+            </td>
+        </tr>
+        <tr>
+            <td>Image de profil : </td>
+            <td>
+                <input type="text" name="pic" value='<%= (unUGet==null)?"":unUGet.Pic %>'>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <input type="reset" name="Annuler" value="Annuler">
+            </td>
+            <td><%= (unUGet==null)? "<input type='submit' name='valider' value='Valider' >" :  "<input type='submit' name='modifier' value='Modifier' >" %> </td>
+        </tr>
+
+    </table>
+</form>
+
+<p>
+
+
+    <br />
+
+    <br />
+    <%
             
             string chaine ="";
             if (Request.Form["valider"] != null)
@@ -78,19 +106,27 @@
             }
             
             
-            %>
-     </p>
-        <div id="id1"   >           
-            <%= chaine %>    
-        </div>
-        
-        
-        <div id="id2">
-            <h2> Liste des utilisateurs </h2>
-            <table border="1">
-                <tr><td> id Utilisateur </td><td> Nom </td> <td> Prénom </td> <td> Mail </td><td> Mot de passe </td><td> Pic </td> <td> Actions </td> </tr>
-            
-                <% 
+    %>
+</p>
+<div id="id1">
+    <%= chaine %>
+</div>
+
+
+<div id="id2">
+    <h2>Liste des utilisateurs </h2>
+    <table border="1">
+        <tr>
+            <td>id Utilisateur </td>
+            <td>Nom </td>
+            <td>Prénom </td>
+            <td>Mail </td>
+            <td>Mot de passe </td>
+            <td>Pic </td>
+            <td>Actions </td>
+        </tr>
+
+        <% 
                         string chaine1 = "";
                         
                         List<reseau_fly.Utilisateur> lesUtilisateurs = uneBdd.selectAllUtilisateurs();
@@ -109,10 +145,10 @@
                                     +"</td>"
                                     +"</tr>";
                         }
-                %>   
-                <%= chaine1 %>
-            </table>
-        </div>
-    <div>
-        <!-- #Include virtual="include/footer.aspx" -->
-    </div> 
+        %>
+        <%= chaine1 %>
+    </table>
+</div>
+<div>
+    <!-- #Include virtual="include/footer.aspx" -->
+</div>

@@ -23,13 +23,16 @@ namespace reseau_fly.template
             string mail = Mail.Text;
             string mdp = Mdp.Text;
 
-            if(uneBdd.verifUtilisateur(mail, mdp) != null)
+            if (uneBdd.verifUtilisateur(mail, mdp) != null)
             {
                 unUtilisateur = uneBdd.verifUtilisateur(mail, mdp);
 
                 Session["nom"] = unUtilisateur.Nom;
                 Session["prenom"] = unUtilisateur.Prenom;
                 Session["mail"] = unUtilisateur.Mail;
+                Session["Id_U"] = unUtilisateur.Id_U;
+
+                //uneBdd.selectUserGroupe(unUtilisateur.Id_U);
 
                 Response.Redirect("home.aspx");
             }
