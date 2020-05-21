@@ -106,6 +106,7 @@
     <Content Include="template\images\athenes.jpg" />
     <Content Include="template\images\bg-title-01.jpg" />
     <Content Include="template\images\bg-title-02.jpg" />
+    <Content Include="template\images\gtfo.jpg" />
     <Content Include="template\images\icon\avatar-01.jpg" />
     <Content Include="template\images\icon\avatar-02.jpg" />
     <Content Include="template\images\icon\avatar-03.jpg" />
@@ -144,6 +145,7 @@
     <Content Include="template\js\main.js" />
     <Content Include="template\js\moment.js" />
     <Content Include="template\media\9606031aabebde32fa96edeff071a132.jpg" />
+    <Content Include="template\modal.aspx" />
     <Content Include="template\table.html" />
     <Content Include="template\typo.html" />
     <Content Include="template\vendor\animsition\animsition.min.css" />
@@ -374,6 +376,13 @@
     </Compile>
     <Compile Include="template\login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="template\modal.aspx.cs">
+      <DependentUpon>modal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="template\modal.aspx.designer.cs">
+      <DependentUpon>modal.aspx</DependentUpon>
     </Compile>
     <Compile Include="template\voyage.aspx.cs">
       <DependentUpon>voyage.aspx</DependentUpon>

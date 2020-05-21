@@ -7,6 +7,10 @@
     string details = "";
 
     string details2 = "";
+    
+    string titre_groupes_dispo ="";
+
+    string groupes_dispo = "";
 
     if (Request["id_T"] != null)
     {
@@ -20,7 +24,9 @@
 
         string destinationDate = unTrajet.Destination;
 
-        List<reseau_fly.Trajet> desTrajets = uneBdd.selectDateDestination(destinationDate);
+        List<reseau_fly.Trajet> desTrajets = uneBdd.selectDateDestination(destinationDate, id_T);
+
+        List<reseau_fly.Groupe> lesGroupes = uneBdd.selectTrajetGroupe(id_T);
 
         details += "<ul style='list-style: none;'>" +
                     "<li>" +
@@ -47,25 +53,34 @@
 
 
         image += "<img src='" + unTrajet.Image + "'></img>" +
-                    "<h4 style='padding:10px 10px 10px; border-bottom:1px solid #000'>" +
+                    "<h4 style='padding:10px 10px 20px;'>" +
                     "<a style='display:inline; padding:5px;' href='groupe.aspx?action=new&id_T="+ unTrajet.Id_T +"'>" +
                     "<button class='button-card' style='padding:5px 10px; float:left;'>Créer un groupe de voyage !</button>" + 
-                    "</a>" +
-                    "<a style='display:inline; padding:5px;' href='groupe.aspx?id_T="+ unTrajet.Id_T +"'>" +
-                    "<button class='button-card' style='padding:5px 10px; float:none;'>Voir les groupes disponibles !</button>" + 
-                    "</a>" +
-                    "</h4>";
+                    "</a>";
+
+                    if(lesGroupes.Count != 0)
+                    {
+                        image += "<div style='display:inline; padding:5px;'>" +
+                        "<button id='myBtn' class='button-card' style='padding:5px 10px; float:none;'>Voir les groupes disponibles !</button>" + 
+                        "</div>";
+                    }
+
+                    image +="</h4>";
+
                     if(Session["Id_U"] != null)
                     {
                         List<reseau_fly.Groupe> desGroupes = uneBdd.selectUserGroupe(Convert.ToInt32(Session["Id_U"]));
 
-                        image += "<h4 style='padding:10px 10px 10px;'>Lier à un groupe existant : " + 
+                        if(desGroupes.Count != 0 )
+                        {
+                                image += "<h4 style='padding:10px 10px 10px;'>Lier à un groupe existant : " + 
                                     "<select style='display:inline; border:0px' name='liste_groupe' id='date_choisie'>" +
                                     "<option selected='true' disabled='disabled'> Vos groupes disponibles </option>";
 
-                        foreach (reseau_fly.Groupe unGroupe in desGroupes)
-                        {
-                            image += "<option value=" + unGroupe.Nom + ">" + unGroupe.Nom + "</option>";
+                                    foreach (reseau_fly.Groupe unGroupe in desGroupes)
+                                    {
+                                        image += "<option value=" + unGroupe.Nom + ">" + unGroupe.Nom + "</option>";
+                                    }
                         }
 
                         image += "</select>";
@@ -74,29 +89,57 @@
                         {
                             int liste_groupe_id_G = int.Parse(Request.Form["liste_groupe"]);
 
-                            image += "<a style='display:inline; padding:10px;' href='voyage.aspx?action=create&id_G='" + liste_groupe_id_G + "'&id_T=" + date_id_T + "'><button class='button-card' style='float:none;padding:5px 10px'>Lier !</button></a>";
+                            image += "<a style='display:inline; padding:10px;' href='groupe.aspx?action=lier&id_G='" + liste_groupe_id_G + "'&id_T=" + date_id_T + "'><button class='button-card' style='float:none;padding:5px 10px'>Lier !</button></a>";
                         }
 
                         image += "</h4>";
                     }
 
         details2 += "<h3 style='padding:0px 10px 10px; border-bottom:1px solid #000'>" +
-                    "<i class='fas fa-calendar-alt' style='margin-right: 20px;'></i>" + unTrajet.Date + "</h3>" +
-                    "<h4 style='padding:10px 10px 10px;'>" +
-                    "<select style='display:inline; border:0px' name='date' id='date_choisie'>" +
-                    "<option selected='true' disabled='disabled'> Autres dates disponibles </option>";
-        foreach (reseau_fly.Trajet dateTrajet in desTrajets)
-        {
-            details2 += "<option value=" + dateTrajet.Date + ">" + dateTrajet.Date + "</option>";
-        }
-        details2 += "</select>";
+                    "<i class='fas fa-calendar-alt' style='margin-right: 20px;'></i>" + unTrajet.Date + "</h3>";
 
-        if(Request.Form["date"] != null)
-        {
-            date_id_T = int.Parse(Request.Form["date"]);
-        }
 
-        details2 += "<a style='display:inline; padding:10px;' href='voyage.aspx?id_T="+ date_id_T +"'><button class='button-card' style='padding:5px 10px'>Choisir !</button></a></h4>";
+        if(desTrajets.Count == 0)
+        {
+            details2 += "<h4 style='padding:10px 10px 10px;'>Aucune autres dates disponibles</h4>";
+        }
+        else
+        {
+            details2 += "<h4 style='padding:10px 10px 10px;'>" +
+                        "<select style='display:inline; border:0px' name='date' id='date_choisie'>" +
+                        "<option selected='true' disabled='disabled'> Autres dates disponibles </option>";
+
+            foreach (reseau_fly.Trajet dateTrajet in desTrajets)
+            {
+                details2 += "<option value=" + dateTrajet.Date + ">" + dateTrajet.Date + "</option>";
+            }
+            details2 += "</select>";
+            
+            if(Request.Form["date"] != null)
+            {
+                date_id_T = int.Parse(Request.Form["date"]);
+                details2 += "<a style='display:inline; padding:10px;' href='voyage.aspx?id_T="+ date_id_T +"'><button class='button-card' style='padding:5px 10px'>Choisir !</button></a></h4>";
+            }
+        }
+        
+        if(lesGroupes.Count == 0)
+        {
+            titre_groupes_dispo += "<h2>Aucun groupes disponibles</h2>";
+        }
+        else
+        {
+            titre_groupes_dispo += "<h2>Liste des groupes disponibles</h2>";
+            
+            foreach( reseau_fly.Groupe leGroupe in lesGroupes )
+            {
+                groupes_dispo += "<h6>Nom du groupe : " + leGroupe.Nom + "<a href='groupe.aspx?id_G=" + leGroupe.Id_G + "'</h6>";
+            }
+        }
+    }
+    else
+    {
+        image+= "<h1>Aucun trajet sélectionné !</h1>" +
+                "<a href='home.aspx'><img src='images/gtfo.jpg'></img></a>";
     }
 %>
 
@@ -120,4 +163,21 @@
             </div>
         </div>
 </section>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 style="text-align:left; color:seagreen;"><%= titre_groupes_dispo %></h2>
+            <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+            <%= groupes_dispo %>
+        </div>
+    </div>
+
+</div>
+
 <!-- #Include virtual="include/footer.aspx" -->

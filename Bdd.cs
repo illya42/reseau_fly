@@ -466,17 +466,19 @@ namespace reseau_fly
             Debug.WriteLine(requete);
             return unTrajet;
         }
-        public List<Trajet> selectDateDestination(string destinationDate)
+        public List<Trajet> selectDateDestination(string destinationDate, int id_T)
         {
             List<Trajet> desTrajets = new List<Trajet>();
 
-            string requete = "select * from trajet where destination = @destinationDate;";
+            string requete = "select * from trajet where destination = @destinationDate and id_T != @id_T;";
             try
             {
                 this.maConnexion.Open();
                 MySqlCommand cmd = this.maConnexion.CreateCommand();
                 cmd.CommandText = requete;
                 cmd.Parameters.AddWithValue("@destinationDate", destinationDate);
+                cmd.Parameters.AddWithValue("@id_T", id_T);
+
                 DbDataReader unReader = cmd.ExecuteReader();
                 try
                 {
@@ -552,6 +554,53 @@ namespace reseau_fly
                 MySqlCommand cmd = this.maConnexion.CreateCommand();
                 cmd.CommandText = requete;
                 cmd.Parameters.AddWithValue("@id_U", id_U);
+                DbDataReader unReader = cmd.ExecuteReader();
+
+                try
+                {
+                    if (unReader.HasRows)
+                    {
+                        while (unReader.Read())
+                        {
+                            Groupe unGroupe = new Groupe(
+                                unReader.GetInt32(0),
+                                unReader.GetString(1)
+                                );
+
+                            desGroupes.Add(unGroupe);
+                        }
+                    }
+                    unReader.Close();
+                }
+                finally
+                {
+                    Console.WriteLine("Erreur extraction des champs de la BDD");
+                }
+
+                this.maConnexion.Close();
+            }
+            catch (Exception E)
+            {
+                Console.WriteLine("Erreur d'execution de la requete : " + requete);
+            }
+
+            Debug.WriteLine(requete);
+
+            return desGroupes;
+        }
+        public List<Groupe> selectTrajetGroupe(int id_T)
+        {
+            List<Groupe> desGroupes = new List<Groupe>();
+
+            string requete = "select g.* from groupe g, voyage v where g.id_G = v.id_G and v.id_T = @id_T;";
+
+            try
+            {
+                this.maConnexion.Open();
+
+                MySqlCommand cmd = this.maConnexion.CreateCommand();
+                cmd.CommandText = requete;
+                cmd.Parameters.AddWithValue("@id_T", id_T);
                 DbDataReader unReader = cmd.ExecuteReader();
 
                 try
