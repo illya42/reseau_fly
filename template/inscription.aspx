@@ -41,7 +41,7 @@
     <div class="page-wrapper" style="background-image: url('images/win.jpg'); box-shadow: inset 2000px 0 0 0 rgba(0, 0, 0, 0.4);">
         <div class="page-content--bge5">
             <div class="container">
-                <div class="login-wrap">
+                <div class="login-wrap" style="padding-top:70px;">
                     <div class="login-content">
                         <div class="login-logo">
                             <a href="#">
@@ -66,17 +66,7 @@
                                     <label>Votre mot de passe :</label>
                                     <asp:TextBox ID="Mdp" runat="server" TextMode="Password" placeholder=" . . . "></asp:TextBox>  
                                 </div>
-                                <div class="login-checkbox">
-                                    <label>
-                                        <input type="checkbox" name="aggree">Agréer aux conditions générales d'utilisation
-                                    </label>
-                                </div>
                                 <asp:Button class="au-btn au-btn--block au-btn--green m-b-20" ID="Button1" runat="server" OnClick="Inscription" Text="Inscription" />
-                                <div class="social-login-content">
-                                    <div class="social-button">
-                                        <button class="au-btn au-btn--block au-btn--blue m-b-20">Inscription avec Google</button>
-                                    </div>
-                                </div>
                             </form>
                             <div class="register-link">
                                 <p>

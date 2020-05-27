@@ -33,8 +33,8 @@ namespace reseau_fly.template
                 Session["Id_U"] = unUtilisateur.Id_U;
 
                 //uneBdd.selectUserGroupe(unUtilisateur.Id_U);
-
                 Response.Redirect("home.aspx");
+                //Response.Redirect(Request.UrlReferrer.ToString());
             }
             else
             {

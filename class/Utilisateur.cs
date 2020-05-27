@@ -13,6 +13,7 @@ namespace reseau_fly
         private string mail;
         private string mdp;
         private string pic;
+
         public Utilisateur()
         {
             this.Id_U = 0;
@@ -22,6 +23,7 @@ namespace reseau_fly
             this.Mdp = "";
             this.Pic = "";
         }
+
         public Utilisateur(string nom, string prenom, string mail, string mdp, string pic)
         {
             this.Nom = nom;

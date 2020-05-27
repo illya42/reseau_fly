@@ -77,6 +77,11 @@ img {
     height: auto;
 }
 
+.picture{
+    width: 800px;
+    height: 400px;
+}
+
 p {
     margin: 0;
 }
@@ -3270,7 +3275,7 @@ section {
 .au-card--border {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
-    border-radius: 3px;
+    border-radius: 6px;
 }
 
     .au-card--border .au-card-title {
@@ -3292,7 +3297,7 @@ section {
         }
 
 .au-card-bordered {
-    border: 1px solid #e5e5e5;
+    border: 1px solid #3da865;
     background: #fff;
     padding: 40px;
     padding-top: 42px;
@@ -14580,7 +14585,7 @@ section {
 }
 
 .bg-overlay--blue {
-    background: rgba(49, 89, 253, 0.9);
+    background: rgba(28, 146, 75, 0.80);
 }
 
 .bg-c1 {
@@ -14797,7 +14802,7 @@ section {
 
 .modal-header {
     padding: 12px 16px;
-    background-color: white;
+    background-color: #3C9E6F;
     color: white;
 }
 

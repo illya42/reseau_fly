@@ -41,7 +41,7 @@
     <div class="page-wrapper" style="background-image: url('images/window.jpg'); box-shadow: inset 2000px 0 0 0 rgba(0, 0, 0, 0.4);">
         <div class="page-content--bge5">
             <div class="container">
-                <div class="login-wrap">
+                <div class="login-wrap" style="padding-top:120px;">
                     <div class="login-content">
                         <div class="login-logo">
                             <a href="#">
@@ -64,11 +64,6 @@
                                     </label>
                                 </div>
                                 <asp:Button class="au-btn au-btn--block au-btn--green m-b-20" ID="Button1" runat="server" OnClick="connection" Text="Connection" />
-                                <div class="social-login-content">
-                                    <div class="social-button">
-                                        <button class="au-btn au-btn--block au-btn--blue m-b-20">Connection avec Google</button>
-                                    </div>
-                                </div>
                             </form>
                             <div class="register-link">
                                 <p>

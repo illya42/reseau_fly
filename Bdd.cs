@@ -545,7 +545,7 @@ namespace reseau_fly
         {
             List<Groupe> desGroupes = new List<Groupe>();
 
-            string requete = "select g.* from utilisateur u, groupe g, utilisateur_admin a, organiser o where u.id_U = a.id_U and a.id_A = o.id_A and o.id_G = g.id_G and u.id_U = @id_U;";
+            string requete = "select g.* from utilisateur u, groupe g, adherer a where u.id_U = a.id_U and a.id_G = g.id_G and u.id_U = @id_U and a.role = 'super';";
 
             try
             {
@@ -634,6 +634,209 @@ namespace reseau_fly
             Debug.WriteLine(requete);
 
             return desGroupes;
+        }
+        public List<Utilisateur> selectGroupeUsers(int id_G)
+        {
+            List<Utilisateur> lesUtilisateurs = new List<Utilisateur>();
+            string requete = "select u.* from utilisateur u, adherer a where u.id_U = a.id_U and a.id_G = @id_G;";
+            try
+            {
+                this.maConnexion.Open();
+                MySqlCommand cmd = this.maConnexion.CreateCommand();
+                cmd.CommandText = requete;
+                cmd.Parameters.AddWithValue("@id_G", id_G);
+                DbDataReader unReader = cmd.ExecuteReader();
+                try
+                {
+                    if (unReader.HasRows)
+                    {
+                        while (unReader.Read())
+                        {
+                            Utilisateur unUtilisateur = new Utilisateur(
+                                unReader.GetInt32(0),
+                                unReader.GetString(1),
+                                unReader.GetString(2),
+                                unReader.GetString(3),
+                                unReader.GetString(4),
+                                unReader.GetString(5)
+                                );
+                            lesUtilisateurs.Add(unUtilisateur);
+                        }
+                    }
+                    unReader.Close();
+                }
+                finally
+                {
+                    Console.WriteLine("Erreur extraction des champs de la BDD");
+                }
+                this.maConnexion.Close();
+            }
+            catch (Exception E)
+            {
+                Console.WriteLine("Erreur d'execution de la requete : " + requete);
+            }
+            return lesUtilisateurs;
+        }
+        public reseau_fly.Groupe detailGroupe(int id_G)
+        {
+            Groupe unGroupe = null;
+
+            string requete = "select * from groupe where id_G = @id_G;";
+            try
+            {
+                this.maConnexion.Open();
+                MySqlCommand cmd = this.maConnexion.CreateCommand();
+                cmd.CommandText = requete;
+                cmd.Parameters.AddWithValue("@id_G", id_G);
+                DbDataReader unReader = cmd.ExecuteReader();
+                try
+                {
+                    if (unReader.HasRows)
+                    {
+                        if (unReader.Read())
+                        {
+                            unGroupe = new Groupe
+                                (
+                                unReader.GetInt32(0),
+                                unReader.GetString(1)
+                                );
+                        }
+                    }
+                    unReader.Close();
+                }
+                finally
+                {
+                    Console.WriteLine("Erreur extraction champs de la base de données ");
+                }
+                this.maConnexion.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Erreur d'execution de la requete :" + requete);
+            }
+            Debug.WriteLine(requete);
+            return unGroupe;
+        }
+
+        public String selectRoleUser(int id_U)
+        {
+            string requete = "select role from adherer where id_U = @id_U;";
+
+            string role = "";
+
+            try
+            {
+                this.maConnexion.Open();
+                MySqlCommand cmd = this.maConnexion.CreateCommand();
+                cmd.CommandText = requete;
+                cmd.Parameters.AddWithValue("@id_U", id_U);
+                DbDataReader unReader = cmd.ExecuteReader();
+                try
+                {
+                    if (unReader.HasRows)
+                    {
+                        while (unReader.Read())
+                        {
+                            role = unReader.GetString(0);
+                        }
+                    }
+                    unReader.Close();
+                }
+                finally
+                {
+                    Console.WriteLine("Erreur extraction des champs de la BDD");
+                }
+                this.maConnexion.Close();
+            }
+            catch (Exception E)
+            {
+                Console.WriteLine("Erreur d'execution de la requete : " + requete);
+            }
+            Debug.WriteLine(requete);
+            return role;
+        }
+        public List<Details_Voyage> selectDetailsVoyage(int id_G)
+        {
+            List<Details_Voyage> lesDetails = new List<Details_Voyage>();
+
+            string requete = "select v.id_V, t.date, v.titre, t.destination from trajet t, voyage v where t.id_T = v.id_T and v.id_G = @id_G;";
+            try
+            {
+                this.maConnexion.Open();
+                MySqlCommand cmd = this.maConnexion.CreateCommand();
+                cmd.CommandText = requete;
+                cmd.Parameters.AddWithValue("@id_G", id_G);
+                DbDataReader unReader = cmd.ExecuteReader();
+                try
+                {
+                    if (unReader.HasRows)
+                    {
+                        while (unReader.Read())
+                        {
+                            Details_Voyage unDetail = new Details_Voyage(
+                                unReader.GetInt32(0),
+                                unReader.GetString(1),
+                                unReader.GetString(2),
+                                unReader.GetString(3)
+                                );
+                            lesDetails.Add(unDetail);
+                        }
+                    }
+                    unReader.Close();
+                }
+                finally
+                {
+                    Console.WriteLine("Erreur extraction des champs de la BDD");
+                }
+                this.maConnexion.Close();
+            }
+            catch (Exception E)
+            {
+                Console.WriteLine("Erreur d'execution de la requete : " + requete);
+            }
+            Debug.WriteLine(requete);
+            return lesDetails;
+        }
+        public List<Adherer> selectAdherer(int id_U)
+        {
+            List<Adherer> lesAdhesions = new List<Adherer>();
+
+            string requete = "select * from adherer where id_U = @id_U;";
+            try
+            {
+                this.maConnexion.Open();
+                MySqlCommand cmd = this.maConnexion.CreateCommand();
+                cmd.CommandText = requete;
+                cmd.Parameters.AddWithValue("@id_G", id_U);
+                DbDataReader unReader = cmd.ExecuteReader();
+                try
+                {
+                    if (unReader.HasRows)
+                    {
+                        while (unReader.Read())
+                        {
+                            Adherer uneAdhesion = new Adherer(
+                                unReader.GetInt32(0),
+                                unReader.GetInt32(1),
+                                unReader.GetString(2)
+                                );
+                            lesAdhesions.Add(uneAdhesion);
+                        }
+                    }
+                    unReader.Close();
+                }
+                finally
+                {
+                    Console.WriteLine("Erreur extraction des champs de la BDD");
+                }
+                this.maConnexion.Close();
+            }
+            catch (Exception E)
+            {
+                Console.WriteLine("Erreur d'execution de la requete : " + requete);
+            }
+            Debug.WriteLine(requete);
+            return lesAdhesions;
         }
     }
 }

@@ -103,6 +103,7 @@
     <Content Include="template\groupe.aspx" />
     <Content Include="template\home.aspx" />
     <Content Include="template\images\alger.jpg" />
+    <Content Include="template\images\amsterdam.jpg" />
     <Content Include="template\images\athenes.jpg" />
     <Content Include="template\images\bg-title-01.jpg" />
     <Content Include="template\images\bg-title-02.jpg" />
@@ -125,6 +126,7 @@
     <Content Include="template\images\londres.jpg" />
     <Content Include="template\images\lyon.jpg" />
     <Content Include="template\images\madrid.jpg" />
+    <Content Include="template\images\marseilles.jpg" />
     <Content Include="template\images\moscou.jpg" />
     <Content Include="template\images\newyork.jpg" />
     <Content Include="template\images\nice.jpg" />
@@ -132,6 +134,7 @@
     <Content Include="template\images\sky.jpg" />
     <Content Include="template\images\toulouse.jpg" />
     <Content Include="template\images\tunis.jpg" />
+    <Content Include="template\images\viennes.jpg" />
     <Content Include="template\images\win.jpg" />
     <Content Include="template\images\window.jpg" />
     <Content Include="template\inbox.html" />
@@ -319,11 +322,11 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="class\Adherer.cs" />
+    <Compile Include="class\Details_Voyage.cs" />
     <Compile Include="class\Etapes.cs" />
     <Compile Include="class\Groupe.cs" />
-    <Compile Include="class\Membres.cs" />
     <Compile Include="class\Trajet.cs" />
-    <Compile Include="class\Utilisateur_admin.cs" />
     <Compile Include="Bdd.cs" />
     <Compile Include="class\Voyage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
